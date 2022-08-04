@@ -47,13 +47,15 @@ class Hangman:
         self.word = random.choice(self.word_list)
         self.word_guessed = list('_'*len(self.word))
         self.num_letters = len(set(self.word))
-        # TODO 2: Initialize the attributes as indicated in the docstring
-        # TODO 2: Print two message upon initialization:
-        # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
-        # 2. {word_guessed}
-        pass
+        self.list_letters = []
+        
+        print(f"The mystery word has {len(self.word)} characters.")
+        print(f"{self.word_guessed}")
 
-    def check_letter(self, letter) -> None:
+
+
+    def check_letter(self, letter):
+
         '''
         Checks if the letter is in the word.
         If it is, it replaces the '_' in the word_guessed list with the letter.
@@ -65,44 +67,57 @@ class Hangman:
             The letter to be checked
 
         '''
+        if letter.lower() in self.word:
+            
+            for letter_position in range(len(self.word)):
+                
+                if self.word[letter_position] == letter.lower():
+                    self.word_guessed[letter_position] = letter.lower()
+            
+            self.num_letters-=1
+        
+        else:      
+            self.num_lives-=1
+           
         # TODO 3: Check if the letter is in the word. TIP: You can use the lower() method to convert the letter to lowercase
         # TODO 3: If the letter is in the word, replace the '_' in the word_guessed list with the letter
         # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
         # TODO 3: If the letter is not in the word, reduce the number of lives by 1
         # Be careful! A word can contain the same letter more than once. TIP: Take a look at the index() method in the string class
-        pass
+
+
 
     def ask_letter(self):
-        '''
-        Asks the user for a letter and checks two things:
-        1. If the letter has already been tried
-        2. If the character is a single character
-        If it passes both checks, it calls the check_letter method.
-        '''
         
-        while True:
+        while True:         
             letter = input('Guess a letter. \n')
+            
             if len(letter) == 1 and ord(letter.lower()) in range(97,123):
-                break
+                
+                if letter.lower() not in self.list_letters:
+                    break
+                else:
+                    print(f"{letter} has already been tried.")
+                
             else:
                 print("Please, enter just one character")
-        # TODO 1: Ask the user for a letter iteratively until the user enters a valid letter
-        # TODO 1: Assign the letter to a variable called `letter`
-        # TODO 1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
-        # TODO 2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
-        # TODO 3: If the letter is valid, call the check_letter method
-        pass
+
+        self.check_letter(letter)
+
+
 
 def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
-    Hangman.ask_letter(Hangman)
+    game.ask_letter()
     # TODO 2: To test this task, upon initialization, two messages should be printed 
     # TODO 3: To test this task, you call the ask_letter method and check if the letter is in the word
     
     # TODO 4: Iteratively ask the user for a letter until the user guesses the word or runs out of lives
     # If the user guesses the word, print "Congratulations, you won!"
     # If the user runs out of lives, print "You ran out of lives. The word was {word}"
+
+
 
 if __name__ == '__main__':
     word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon']
