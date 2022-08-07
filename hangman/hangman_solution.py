@@ -9,9 +9,15 @@ class Hangman:
         self.word_list = word_list
         self.num_lives = num_lives
         self.word = random.choice(self.word_list)
-        self.word_guessed = list('_'*len(self.word))
+        self.word_guessed = list('_' * len(self.word))
         self.num_letters = len(set(self.word))
         self.list_letters = []
+        
+        self.hangman_picture = ['      _______\n     |/      |',
+'     |      (_)',
+'     |      \|/',
+'     |       |',
+'     |      / \ \n     | \n    _|___']
         
         print(f'The mystery word has {len(self.word)} characters.')
         print(f'{self.word_guessed}')
@@ -27,10 +33,15 @@ class Hangman:
                 if self.word[letter_position] == letter.lower():
                     self.word_guessed[letter_position] = letter.lower()
             
-            self.num_letters-=1
+            self.num_letters -= 1
         
-        else:      
-            self.num_lives-=1
+        else:
+                  
+            self.num_lives -= 1
+            
+            for line_number in range(5 - self.num_lives):
+                print(self.hangman_picture[line_number])
+            print()
 
 
 
@@ -39,7 +50,7 @@ class Hangman:
         while True:         
             letter = input('Guess a letter. \n')
             
-            if len(letter) == 1 and ord(letter.lower()) in range(97,123):
+            if len(letter) == 1 and ord(letter.lower()) in range(97, 123):
                 
                 if letter.lower() not in self.list_letters:
                     break
@@ -56,7 +67,7 @@ class Hangman:
 
 def play_game(word_list):
 
-    game = Hangman(word_list, num_lives=5)
+    game = Hangman(word_list, num_lives = 5)
     
     while True:
         game.ask_letter()
