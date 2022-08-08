@@ -24,6 +24,8 @@
 
 - Below one can see a demonstration of the flow control in the console:
 
+![picture](../pictures/milestone_2.png?raw=true)
+
 - Of course, to commit the code and push it to git hub, the following commands were made use of:
 
 ```bash
@@ -61,6 +63,8 @@ rm
 ```
 
 - Below we can see the messages " The mystery word has {x} characters. " and " ' \_ ', ' \_ ', ' \_ ', ' \_ ' " being printed. This demonstrates the __init__ method running upon instantiation of a Hangman object:
+
+![picture](../pictures/milestone_3.png?raw=true)
 
 ## Milestone 4
 
@@ -105,6 +109,8 @@ rm
 
 - And here is another screenprint demonstrating the new flow control and the check_letter method in action:
 
+![picture](../pictures/milestone_4.png?raw=true)
+
 ## Milestone 5
 
 - This milestone involved the implementation of the play_game function. The play_game function instantiates a Hangman object under the moniker of "game". Then a while loop runs the ask_letter() method and prints the word_guessed attribute for "game" until the loop breaks, either by the num_letters attribute reaching 0 or the num_lives attribute reaching 0. Of course, this function relies on all the previous functionality we built in previous milestones. Code below:
@@ -129,6 +135,8 @@ def play_game(word_list):
 ```
 
 - Later, I also added a few extra lines to slowly generate a hangman picture as defeat draws nearer. A full game in the code's current state is screencapped below: 
+
+![picture](../pictures/milestone_5.png?raw=true)
 
 ## Conclusions
 
